@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Visitenkarte von {{ employee.firstName }} {{ employee.lastName }}{% endblock %}
+{% block body %}
+    {#Based on the card flip in this website: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_flip_card#}
+    <div class="flip-card mt-5">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <div class="flip-card-front-content">
+                    <div class="row my-3 mb-4">
+                        <a href="https://artd.ch" target="_blank" class="d-block w-auto p-0"><img class="artd-logo p-0 mx-4" src='{{ '/images/logos/'~ company.logo }}' alt="Avatar"></a>
+                        <div class="col-6 artd-text">
+                            <p class="p-0 artd-name">
+                                {{ company.name|trim('GmbH') }}
+                            </p>
+                            <p class="artd-address p-0">
+                                {{ company.addressFkid.street }} {{ company.addressFkid.houseNumber }}
+                                <br>{{ company.addressFkid.postalCode }} {{ company.addressFkid.town }}</p>
+                        </div>
+                    </div>
+                    <h1 class="text-break">{{ employee.firstName }} {{ employee.lastName }}</h1>
+                    <p>{{ employeeRole.role }}</p>
+                    <a href="mailto:{{ employee.email }}" class="row-email my-3"><i class="fa-regular fa-xl fa-envelope me-2"></i> {{ employee.email }}</a>
+                    <a href="tel:+41 {{ employee.telephone }}" class="row-telephone my-3"><i class="fa fa-xl fa-phone me-2"></i>+41 {{ employee.telephone }}</a>
+                    <a href="tel:+41 {{ employee.mobile }}" class="row-mobile my-3"><i class="fa fa-xl fa-mobile me-2"></i>+41 {{ employee.mobile }}</a>
+                    <hr class="my-4">
+                    <div class="d-flex social-media-accounts">
+                        {% for socialMediaProfile in socialMediaProfiles %}
+                            {% if socialMediaProfile.username != '' %}
+                                <a href="{{ socialMediaProfile.socialMediaFkid.link }}{{ socialMediaProfile.username }}" class="d-inline-block">
+                                    {% if socialMediaProfile.socialMediaFkid.platform != 'LinkedIn' %}
+                                        <i class="fa-brands fa-2xl fa-square-{{ socialMediaProfile.socialMediaFkid.platform|lower }}"></i> {#If social media platform isn't LinkedIn use FontAwesome Square#}
+                                    {% else %}
+                                        <i class="fa-brands fa-2xl fa-{{ socialMediaProfile.socialMediaFkid.platform|lower }}"></i>
+                                    {% endif %}
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <a class="btn-flip rounded-circle text-center">
+                        <i class="fa-solid fa-rotate fa-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="flip-card-back">
+                <div class="flip-card-back-content">
+                    {% if employee is not null %}
+                        <a href="/vcards/{{ employee.id }}-{{ employee.slug }}.vcf" download class="mb-4 text-decoration-underline"><i class="fa-solid fa-file-arrow-down me-2"></i>vCard speichern</a>
+                        <img src="/images/qr-code/{{ employee.id }}-{{ employee.slug }}.png" alt="qr-code">
+                        <p class="card-qrcode-description">QR-Code scannen, um die Visitenkarte abzurufen.</p>
+                    {% endif %}
+                    <a class="btn-flip rounded-circle text-center">
+                        <i class="fa-solid fa-rotate fa-xl fa-rotate-180"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

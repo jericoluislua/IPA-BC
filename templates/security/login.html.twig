@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in{% endblock %}
+
+{% block additional_danger_classes %}my-5{% endblock %}
+{% block body %}
+{% if error %}
+    <div class="alert alert-danger alert-dismissible fade show my-5" role="alert">
+        <i class="fa-solid fa-circle-exclamation me-2"></i><p class="d-inline">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endif %}
+<div class="mx-auto pt-5 card card-admin p-md-4">
+    <form method="post" novalidate>
+
+        <h1 class="mb-3">Login</h1>
+        <label for="inputEmail">E-Mail</label>
+        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-3" autocomplete="email" required autofocus>
+        <label for="inputPassword">Passwort</label>
+        <input type="password" name="password" id="inputPassword" class="form-control mb-5" autocomplete="current-password" required>
+
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
+
+        <button class="btn btn-lg btn-primary" type="submit">
+            ANMELDEN
+        </button>
+    </form>
+</div>
+{% endblock %}

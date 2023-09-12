@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+{% set show_nav = true %}
+{% block title %}Mitarbeitendeliste{% endblock %}
+{% block body %}
+<div>
+    <div class="card m-md-5 p-md-4">
+        <h1 class="mb-2">Mitarbeitendeliste</h1>
+        <div class="table-responsive pb-5">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col" class="d-none d-md-table-cell col-md-3">Vorname</th><!--Visible on desktop view only-->
+                    <th scope="col" class="d-none d-md-table-cell col-md-3">Nachname</th><!--Visible on desktop view only-->
+                    <th scope="col" class="d-md-none">Name</th><!--Visible on mobile view only-->
+                    <th scope="col" class="col-md-2">Funktion</th>
+                    <th scope="col" class="col-md-1">
+                        <a class="btn btn-primary" href="{{ path('employee_create') }}">
+                            <i class="fa-solid fa-plus me-md-2 d-none d-md-inline-block"></i>ERSTELLEN</a></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for employee in allEmployees %}
+                    <tr>
+
+                        <td class="d-none d-md-table-cell">{{ employee.firstName }}</td><!--Visible on desktop view only-->
+                        <td class="d-none d-md-table-cell">{{ employee.lastName }}</td><!--Visible on desktop view only-->
+                        <td class="d-md-none">{{ employee.firstName }} {{ employee.lastName }}</td><!--Visible on mobile view only-->
+                        {% for employeeRole in allEmployeeRoles %}
+                            {% if employeeRole.employeeFkid == employee %} {#Only show cell if employee and employeeRole.employeeFkid are the same#}
+                                <td>{{ employeeRole.role }}</td>
+                            {% endif %}
+                        {% endfor %}
+                        <td class="d-none d-md-table-cell">
+                            {#After protocol 1: Updated how slugs are called from employee.firstName ~ employee.lastName to employee.slug itself#}
+                            <a href="{{ path('employee_businesscard', {'employee_id': employee.id, 'slug': employee.slug}) }}" class="btn btn-icon btn-tertiary" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="{{ path('employee_edit', {'employee_id': employee.id}) }}" class="btn btn-icon btn-dark"><i class="fa-solid fa-edit"></i></a>
+                            <button type="button" class="btn btn-icon btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteMitarbeitende{{ employee.id }}">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                        <td class="d-md-none">
+                            <div class="dropdown">
+                                <button class="btn btn-accent" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-ellipsis fa-xl"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    {#After protocol 1: Updated how slugs are called from employee.firstName ~ employee.lastName to employee.slug itself#}
+                                    <li><a class="dropdown-item" href="{{ path('employee_businesscard', {'employee_id': employee.id, 'slug': employee.slug}) }}" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square me-3"></i>ÖFFNEN</a></li>
+                                    <li><a class="dropdown-item" href="{{ path('employee_edit', {'employee_id': employee.id}) }}"><i class="fa-solid fa-edit me-3"></i>BEARBEITEN</a></li>
+                                    <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteMitarbeitende{{ employee.id }}"><i class="fa-solid fa-trash me-3"></i>LÖSCHEN</button></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <div class="modal fade" id="deleteMitarbeitende{{ employee.id }}" tabindex="-1" aria-labelledby="{{ employee.id }}ModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="{{ employee.id }}ModalLabel">Wollen Sie den Mitarbeitenden {{ employee.firstName }} {{ employee.lastName }} löschen?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="employee-name">Name: {{ employee.firstName }} {{ employee.lastName }}</p>
+                                    {% for employeeRole in allEmployeeRoles %}
+                                        {% if employeeRole.employeeFkid == employee %}
+                                            <p>Funktion: {{ employeeRole.role }}</p>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <div class="modal-footer d-flex">
+                                    <button class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">ABBRECHEN</button>
+                                    <a href=" {{ path('employee_delete', {'employee_id': employee.id}) }}" class="btn btn-danger">LÖSCHEN</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

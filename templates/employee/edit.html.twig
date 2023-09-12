@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% set show_nav = true %}
+{% block title %}{{ employee.firstName }} {{ employee.lastName }}{% endblock %}
+{% block body %}
+    <h1>{{ employee.firstName }} {{ employee.lastName }}</h1>
+    <div class="card p-md-4">
+        {{ form_start(form, {'attr': { 'novalidate': 'novalidate'}}) }}
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <h2>Persönliche Daten</h2>
+                {{ form_row(form.first_name, {'attr': {'value': employee.firstName}}) }}
+                {{ form_row(form.last_name, {'attr': {'value': employee.lastName}}) }}
+                {{ form_row(form.email, {'attr': {'value': employee.email}}) }}
+                {{ form_label(form.mobile, "Mobile", {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_row(form.mobile, {'attr': {'value': employee.mobile}}) }}
+                {{ form_label(form.telephone, "Telefon", {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_row(form.telephone, {'attr': {'value': employee.telephone}}) }}
+                {{ form_row(form.role, {'attr': {'value': employeeRole.role}}) }}
+            </div>
+            <div class="col-12 col-md-6">
+                <h2>Social Media</h2>
+                {% for socialMediaProfile in socialMediaProfiles %}
+                    {{ form_label(attribute(form, socialMediaProfile.socialMediaFkid.platform|lower), socialMediaProfile.socialMediaFkid.platform, {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_row(attribute(form, socialMediaProfile.socialMediaFkid.platform|lower), {'attr': {'value': socialMediaProfile.username}}) }}
+                {% endfor %}
+            </div>
+            {{ form_row(form._token) }}
+            <div class="row order-last order-md-2 col-md-6 pe-0">
+                <div class="col-12 col-md-5 pe-0">
+                    {{ form_row(form.save) }}
+                </div>
+                <div class="col-12 col-md-5 pe-0">
+                    <a class="btn btn-secondary" href="{{ path('employee_list') }}">ABBRECHEN</a>
+                </div>
+            </div>
+        </div>
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+{% endblock %}

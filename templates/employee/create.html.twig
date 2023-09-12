@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% set show_nav = true %}
+{% block title %}Mitarbeitende Erstellung{% endblock %}
+{% block body %}
+    <h1>Mitarbeitende einfügen</h1>
+    <div class="card p-md-4">
+        {{ form_start(form, {'attr': { 'novalidate': 'novalidate'}}) }}
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <h2>Persönliche Daten</h2>
+                {{ form_row(form.first_name) }}
+                {{ form_row(form.last_name) }}
+                {{ form_row(form.email) }}
+                {{ form_label(form.mobile, "Mobile", {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_row(form.mobile) }}
+                {{ form_label(form.telephone, "Telefon", {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_row(form.telephone) }}
+                {{ form_row(form.role) }}
+            </div>
+            <div class="col-12 col-md-6">
+                <h2>Social Media</h2>
+                {% for socialMediaPlatform in socialMediaPlatforms %}
+                    {{ form_label(attribute(form, socialMediaPlatform.platform|lower), socialMediaPlatform.platform, {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_row(attribute(form, socialMediaPlatform.platform|lower)) }}
+                {% endfor %}
+            </div>
+            {{ form_row(form._token) }}
+            <div class="row order-last order-md-2 col-md-6 pe-0">
+                <div class="col-12 col-md-5 pe-0">
+                    {{ form_row(form.save) }}
+                </div>
+                <div class="col-12 col-md-5 pe-0">
+                    <a class="btn btn-secondary" href="{{ path('employee_list') }}">ABBRECHEN</a>
+                </div>
+            </div>
+        </div>
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,385 @@
+$primary: #A8D45A;
+$secondary: #AEAEAE;
+$tertiary: #5A908C;
+$accent: #BADAD2;
+$black: #242428;
+$input-color: #888888;
+$required-red: #FF005E;
+$white: #FAFAFA;
+
+body {
+    background-color: $white;
+}
+
+/*FONT*/
+h1, h2, p, a, button, table *, form *, *, .required::after, .input-group .input-group-text{
+    font-family: "TT Interfaces Regular", Arial, sans-serif !important;
+    font-style: normal !important;
+}
+
+h1{
+    font-size: 30px;
+    font-weight: normal;
+    letter-spacing: -0.5px;
+}
+
+h2{
+    font-size: 24px;
+    font-weight: normal;
+}
+
+/*table header content*/
+table thead tr th{
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/*popup modal header content*/
+.modal .modal-dialog .modal-content .modal-header h5{
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/*table body content*/
+table tbody tr td{
+    font-family: "TT Interfaces Thin", Arial, sans-serif !important;
+    font-size: 16px;
+    letter-spacing: 0.25px;
+}
+
+/*popup modal body content*/
+.modal .modal-dialog .modal-content .modal-body p{
+    font-family: "TT Interfaces Thin", Arial, sans-serif !important;
+    font-size: 16px;
+    letter-spacing: 0.25px;
+}
+
+form label{
+    font-family: "TT Interfaces Thin", Arial, sans-serif !important;
+    font-size: 16px;
+    letter-spacing: 0.25px;
+}
+
+form input, form input.form-control::placeholder{
+    font-size: 16px;
+    letter-spacing: 0.25px;
+}
+
+button, a.btn, .dropdown-item, .nav-link{
+    text-transform: uppercase;
+    font-size: 16px !important;
+    letter-spacing: 1.25px;
+}
+
+/*business card owner*/
+.flip-card h1.card-name{
+    font-size: 26px;
+    font-weight: normal;
+    letter-spacing: -0.5px;
+}
+
+/*business card company name + address*/
+.flip-card div.artd-text p{
+    font-size: 12px;
+    font-weight: normal;
+}
+/*END FONT*/
+
+/*BUTTONS*/
+/*BUTTON*/
+.btn{
+    border-radius: 0;
+    padding: 11px 15px;
+    width: 100%;
+}
+.btn:hover{
+    opacity: .8;
+}
+.btn-primary, .btn-primary:hover, .btn-primary:active{
+    color: $black !important;
+    background: $primary !important;
+    border-color: $primary !important;
+}
+
+.btn-secondary, .btn-secondary:hover, .btn-secondary:active{
+    color: $white !important;
+    background: $secondary !important;
+    border-color: $secondary !important;
+}
+
+.btn-dark, .btn-dark:hover, .btn-dark:active{
+    color: $white !important;
+    background: $black !important;
+    border-color: $black !important;
+}
+
+.btn-tertiary, .btn-tertiary:hover, .btn-tertiary:active{
+    color: $white;
+    background: $tertiary;
+    border-color: $tertiary;
+}
+
+.btn-accent, .btn-accent:hover, .btn-accent:active{
+    color: $black;
+    background: $accent;
+    border-color: $accent;
+}
+
+.btn-danger, .btn-danger:hover, .btn-danger:hover{
+    color: $black;
+    background: $required-red;
+    border-color: $required-red;
+}
+
+.btn-login{
+    max-width: 100%;
+}
+/*END BUTTONS*/
+
+
+/*FLIP CARD*/
+.flip-card {
+    background-color: transparent;
+    width: 275px;
+    height: 488px;
+    perspective: 1000px;
+    margin: 0 auto;
+}
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.flip-card.hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background-color: $black;
+    color: $white;
+    overflow: hidden;
+}
+
+.flip-card, .flip-card div{
+    border-radius: 10px;
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+}
+
+.artd-logo {
+    width: 50px;
+    height: 50px;
+}
+
+.flip-card-front a, .flip-card-back b{
+    color: $white;
+}
+
+.flip-card-front-content *, .flip-card-back-content *{
+    margin-bottom: 0;
+    image-rendering: -moz-crisp-edges;          /* Firefox */
+    image-rendering:   -o-crisp-edges;          /* Opera   */
+    image-rendering: crisp-edges;
+}
+
+.flip-card-front-content, .flip-card-back-content{
+    margin: 30px 15px 0;
+}
+
+.flip-card hr{
+    color: $white;
+    opacity: 1;
+    border-radius: 5px;
+}
+
+.btn-flip{
+    width: 100px;
+    height: 100px;
+    background: $white;
+    position: absolute;
+    inset: 90% 0 50px;
+    margin: 0 auto;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.btn-flip .fa-rotate{
+    color: $tertiary;
+    font-weight: lighter;
+}
+
+.flip-card a{
+    text-decoration: none;
+    color: $white;
+    display: block;
+}
+
+.social-media-accounts.d-flex{
+    gap: 44px;
+}
+.row-email svg, .row-telephone svg, .row-mobile svg{
+    width: 25px;
+    height: 25px;
+}
+/*END FLIP CARD*/
+
+/*CARD*/
+.card-admin{
+    max-width: 650px;
+}
+
+.card{
+    background: transparent;
+    border: 0;
+}
+/*END CARD*/
+
+/*FORMS*/
+input[type="email"], input[type="password"], input[type="text"]{
+    padding: 17px;
+}
+
+.form-control, .form-control:focus{
+    color: $input-color;
+}
+
+.form-control::placeholder{
+    color: $input-color;
+    opacity: .5;
+}
+
+/*Adds the asterisk to mark required fields*/
+.required::after{
+    display: inline-block;
+    margin-left: 8px;
+    content: '*';
+    color: $required-red;
+    font-weight: 400;
+}
+.input-group:not(.has-validation) > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating){
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+.input-group .input-group-text{
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.invalid-feedback{
+    color: $required-red;
+}
+
+.was-validated .form-control:invalid, .form-control.is-invalid{
+    border-color: $required-red;
+    background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 12 12%27 width=%2712%27 height=%2712%27 fill=%27none%27 stroke=%27%23FF005E%27%3e%3ccircle cx=%276%27 cy=%276%27 r=%274.5%27/%3e%3cpath stroke-linejoin=%27round%27 d=%27M5.8 3.6h.4L6 6.5z%27/%3e%3ccircle cx=%276%27 cy=%278.2%27 r=%27.6%27 fill=%27%23dc3545%27 stroke=%27none%27/%3e%3c/svg%3e");
+}
+
+.was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
+    border-color: $required-red;
+    box-shadow: 0 0 0 0.25rem rgba(255, 0, 94, 0.25); //required-red with 0.25 opacity
+}
+
+.form-control:focus{
+    border-color: $tertiary;
+    box-shadow: 0 0 0 0.25rem rgba(90, 144, 140, 0.25); //tertiary with 0.25 opacity
+}
+/*END FORMS*/
+
+
+/*NOTIFICATION FLASHES*/
+.alert{
+    border-radius: 0;
+    background: #F2F2F2;
+    border-width: 2px;
+}
+
+.alert p{
+    margin: 0;
+}
+.alert-success {
+    color: $black;
+    border-color: $primary;
+}
+.alert-success svg{
+    color: $primary;
+}
+.alert-danger{
+    color: $required-red;
+    border-color: $required-red;
+}
+
+.alert-danger svg{
+    color: $required-red;
+}
+/*END NOTIFICATION FLASHES*/
+
+/*For devices with width of 768px and more*/
+@media (min-width: 768px){
+    /*FONTS DESKTOP*/
+    h1 {
+        font-size: 36px;
+    }
+
+    table thead tr th, table tbody tr td, form label, form input, .modal .modal-dialog .modal-content .modal-header h5{
+        font-size: 18px;
+    }
+
+    /*business card owner*/
+    .flip-card h1.card-name{
+        font-size: 36px;
+    }
+
+    h2{
+        font-size: 30px;
+    }
+    /*END FONTS DESKTOP*/
+
+    /*BUTTONS*/
+    .btn{
+        max-width: 260px;
+    }
+    .btn-icon{
+        max-width: 48px;
+    }
+    .modal-footer .btn{
+        max-width: 30%;
+    }
+    .btn-create-employee{
+        max-width: 154px;
+    }
+    /*END BUTTONS DESKTOP*/
+
+    /*CARDS*/
+    .card{
+        background: #f2f2f2;
+        border: 1px solid rgba(0, 0, 0, 0.175);
+    }
+
+    .card-admin{
+        padding: 35px;
+    }
+
+    .card-employee-list{
+        margin-top: 15vh;
+    }
+    /*END CARDS DESKTOP*/
+
+    /*GENERAL*/
+    .modal-backdrop{
+        z-index: 1020 !important;
+    }
+    /*END GENERAL*/
+}
